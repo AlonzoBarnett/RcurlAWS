@@ -1,3 +1,4 @@
+#not exported.
 parseCredentialFile <- function(filePath = NULL) {
     #This isn't a super robust file parser, but will work well if AWS credential|config file guidelines are followed.
     #read lines of the credential or config file then iterate over forming a list of profiles.
