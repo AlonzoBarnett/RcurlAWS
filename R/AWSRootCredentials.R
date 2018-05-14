@@ -30,7 +30,7 @@
 #'    2. Credentials file
 #'
 #'It is assumed your credentials file follows the guidelines at:
-#'    https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html
+#'    [AWS CLI Configuration and Credential Files'](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html)
 #'If you have multiple profiles in the credentials file,
 #'    a profile labeled "default" will be searched for UNLESS you explicitly
 #'    declare the profile name to return. 
