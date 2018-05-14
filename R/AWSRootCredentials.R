@@ -30,7 +30,7 @@
 #'    2. Credentials file
 #'
 #'It is assumed your credentials file follows the guidelines at:
-#'    http://blogs.aws.amazon.com/security/post/Tx3D6U6WSFGOK2H/A-New-and-Standardized-Way-to-Manage-Credentials-in-the-AWS-SDKs
+#'    https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html
 #'If you have multiple profiles in the credentials file,
 #'    a profile labeled "default" will be searched for UNLESS you explicitly
 #'    declare the profile name to return. 
@@ -51,7 +51,15 @@
 #Will try to find credentials if you don't provide any information.
 #'\dontrun{rootCreds <- AWSRootCredentials$new()}
 #Is probably best to tell it where to look.
-#'\dontrun{rootCreds <- AWSRootCredentials$new(sourceFile = "C:\\Users\\abarnett\\.aws\\credentials")}
+#
+#Windows ex:
+#'\dontrun{rootCreds <- AWSRootCredentials$new(credentialPrefix = "/i/hide/my/files")}
+#'Provide filenames if not using 'config' & 'credentials'
+#'\dontrun{rootCreds <- AWSRootCredentials$new(
+#'    credentialPrefix = "/i/hide/my/files")}
+#'    credentialFileName = 'myCreds',
+#'    configFileName = 'myConfig'
+#')
 #Explicitly pass access and secret:
 #'\dontrun{rootCreds <- AWSRootCredentials$new(AWS_ACCESS_KEY_ID = "blahblah", AWS_SECRET_ACCESS_KEY = "blahblah")}
 #Print method obscures your access and secret for safety
@@ -59,6 +67,9 @@
 #You can force print if you really want ...
 #'\dontrun{rootCreds$AWS_ACCESS_KEY_ID}
 #'\dontrun{rootCreds$AWS_SECRET_ACCESS_KEY}
+#The 'profileSettings' attribute containes the combination of credentials & config for the profile discovered.
+#'rootCreds$profileSettings
+
 AWSRootCredentials <- R6::R6Class(
     "AWSRootCredentials",
     public = list(
@@ -82,3 +93,14 @@ AWSRootCredentials <- R6::R6Class(
 
 
 rootCreds <- AWSRootCredentials$new()
+
+    AWS_ACCESS_KEY_ID = NULL,
+    AWS_SECRET_ACCESS_KEY = NULL,
+    profileName = NULL, #"default"
+    credentialPrefix = NULL,
+    credentialFileName = NULL,
+    configFileName = NULL
+
+rootCreds <- AWSRootCredentials$new(credentialPrefix = "C:\\Users\\abarnett\\.aws\\")
+
+rootCreds <- AWSRootCredentials$new(credentialPrefix = "C:\\Users\\abarnett\\.aws\\", )
