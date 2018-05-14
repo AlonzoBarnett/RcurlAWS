@@ -22,16 +22,16 @@ genCredentialFilePath <- function(prefix = NULL, credentialFileName = 'credentia
     #if no prefix passed, assume we should look in user home directory.
     if (is.null(prefix)) {
         if (.Platform[['OS.type']]=='windows') {
-            prefix <- sprintf('%s\\.aws\\', Sys.getenv('USERPROFILE'))
+            prefix <- sprintf('%s\\.aws', Sys.getenv('USERPROFILE'))
         } else {
-            prefix <- sprintf('%s/.aws/', path.expand('~'))
+            prefix <- sprintf('%s/.aws', path.expand('~'))
         }
     }
     
     return (
         list(
-            credentialLoc = sprintf('%s%s', prefix, credentialFileName),
-            configLoc = sprintf('%s%s', prefix, configFileName)
+            credentialLoc = sprintf('%s/%s', prefix, credentialFileName),
+            configLoc = sprintf('%s/%s', prefix, configFileName)
         )
     )
 }
