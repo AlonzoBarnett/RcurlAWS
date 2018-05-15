@@ -8,7 +8,7 @@
 #' If no prefix is provided, attempts to identify the default path given the OS detacted.  
 #' The default parameters should be sufficient unless you have customized the credential/config files.
 #' It is assumed your credentials file follows the guidelines at:
-#' [AWS CLI Configuration and Credential Files'](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html)
+#' [AWS CLI Configuration and Credential Files](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html)
 #'
 #' @examples
 #' getProfiles(

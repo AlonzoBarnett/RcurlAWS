@@ -24,13 +24,13 @@
 #'You can use $ to force print of an attribute if you really want to have
 #'    it hanging around on your screen.
 #'
-#'If no arguments are provided, credential priority, not search order
-#'    but what will be returned if found, is loosely based on typical SDK fashion:
+#'If no arguments are provided, credential priority... not search order
+#'    but what will be returned if found... is loosely based on typical SDK fashion:
 #'    1. Environment variables "AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"
 #'    2. Credentials file
 #'
 #'It is assumed your credentials file follows the guidelines at:
-#'    [AWS CLI Configuration and Credential Files'](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html)
+#'    [AWS CLI Configuration and Credential Files](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html)
 #'If you have multiple profiles in the credentials file,
 #'    a profile labeled "default" will be searched for UNLESS you explicitly
 #'    declare the profile name to return. 
