@@ -15,6 +15,6 @@ credsFromInstanceMetadata <- function() {
     
     #Standardize the key names to those used in every other AWS schema.
     names(tmpCreds)[match(c("AccessKeyId", "SecretAccessKey"), names(tmpCreds))] <- c("AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY")
-
+    
     return(tmpCreds)
 }
