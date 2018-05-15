@@ -69,7 +69,7 @@
 #'\dontrun{rootCreds$AWS_SECRET_ACCESS_KEY}
 #The 'profileSettings' attribute containes the combination of credentials & config for the profile discovered.
 #'rootCreds$profileSettings
-
+#'
 AWSRootCredentials <- R6::R6Class(
     "AWSRootCredentials",
     public = list(
@@ -89,4 +89,5 @@ AWSRootCredentials <- R6::R6Class(
             )
             invisible(self)
         }
-))
+    )
+)
