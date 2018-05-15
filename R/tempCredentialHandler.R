@@ -2,7 +2,7 @@
 #' @description Initializes a call to STS or pulls instance meta data
 #' @param rootCredentials (AWSRootCredentials) Your root credential object to feed STS calls
 #' @param roleArn (string) the ARN of the role you want to assume
-#' @param roleSessionName (string) An identifier for the request; this can be used for user auditing on AWS.
+#' @param RoleSessionName (string) An identifier for the request; this can be used for user auditing on AWS.
 #' @param MFADeviceSerialNumber (string) The id number (serial | arn) of your MFA device.
 #' @param Duration (string) Duration, in seconds, of the role session; controls time-to-expire of temporary credentials.
 #'
@@ -19,14 +19,14 @@
 #'
 #' For additional information on STS requests refer to [STS Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html)
 #'
-tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, roleSessionName = NULL, MFADeviceSerialNumber = NULL, Duration = "3600") { 
+tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, RoleSessionName = NULL, MFADeviceSerialNumber = NULL, Duration = "3600") { 
     
     #If you are rotating credentials, this will just use what is stored within the object.   
     if (class(private$rootCredentials)[1] == "AWSRootCredentials") {
         tmpcreds <- getSTSCredentials(
             rootCredentials = private$rootCredentials,
             roleArn = private$roleArn,
-            roleSessionName = private$roleSessionName,
+            RoleSessionName = private$RoleSessionName,
             MFADeviceSerialNumber = private$MFADeviceSerialNumber,
             Duration = private$Duration
         )
@@ -38,7 +38,7 @@ tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, roleSe
         tmpcreds <- getSTSCredentials(
             rootCredentials = rootCredentials,
             roleArn = roleArn,
-            roleSessionName = roleSessionName,
+            RoleSessionName = RoleSessionName,
             MFADeviceSerialNumber = MFADeviceSerialNumber,
             Duration = Duration
         )
@@ -50,7 +50,7 @@ tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, roleSe
                 AWS_SECRET_ACCESS_KEY = rootCredentials$AWS_SECRET_ACCESS_KEY
             )
             private$roleArn <- roleArn
-            private$roleSessionName <- roleSessionName
+            private$RoleSessionName <- RoleSessionName
             private$MFADeviceSerialNumber <- MFADeviceSerialNumber
             private$Duration <- Duration
         }
