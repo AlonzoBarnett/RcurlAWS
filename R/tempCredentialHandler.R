@@ -42,7 +42,7 @@ tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, RoleSe
             MFADeviceSerialNumber = MFADeviceSerialNumber,
             Duration = Duration
         )
-
+        
         #Store the root credentials and required arguments passed to ease rotation calls to STS.
         if (is.null(private$rootCredentials)) {
             private$rootCredentials <- AWSRootCredentials$new(
