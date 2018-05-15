@@ -90,17 +90,3 @@ AWSRootCredentials <- R6::R6Class(
             invisible(self)
         }
 ))
-
-
-rootCreds <- AWSRootCredentials$new()
-
-    AWS_ACCESS_KEY_ID = NULL,
-    AWS_SECRET_ACCESS_KEY = NULL,
-    profileName = NULL, #"default"
-    credentialPrefix = NULL,
-    credentialFileName = NULL,
-    configFileName = NULL
-
-rootCreds <- AWSRootCredentials$new(credentialPrefix = "C:\\Users\\abarnett\\.aws\\")
-
-rootCreds <- AWSRootCredentials$new(credentialPrefix = "C:\\Users\\abarnett\\.aws\\", )
