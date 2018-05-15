@@ -19,7 +19,7 @@ stsGenContentString <- function(roleArn, RoleSessionName, MFADeviceSerialNumber,
     contentString <- paste0(
         sprintf("Action=AssumeRole&RoleSessionName=%s&RoleArn=%s", RoleSessionName, roleArn),
 	    if(!is.null(MFADeviceSerialNumber))sprintf("&SerialNumber=%s&TokenCode=%s", MFADeviceSerialNumber, tokenCode),
-		sprintf("&DurationSeconds=%s&Version=2011-06-15", Duration))
+		sprintf("&DurationSeconds=%s&Version=2011-06-15", Duration)
     )
     
     return(contentString)
