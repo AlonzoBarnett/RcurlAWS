@@ -1,3 +1,4 @@
+#Need to add documentation...
 getMFAToken <- function(){
     #based on:
     # https://stackoverflow.com/questions/16847621/get-data-out-of-a-tcltk-function

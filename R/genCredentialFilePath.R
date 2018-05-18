@@ -17,7 +17,6 @@
 #'     configFileName = 'specialNameConfig'
 #' )
 #'
-#' @export
 genCredentialFilePath <- function(prefix = NULL, credentialFileName = 'credentials', configFileName = 'config') {
     #if no prefix passed, assume we should look in user home directory.
     if (is.null(prefix)) {

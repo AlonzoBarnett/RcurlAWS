@@ -1,7 +1,9 @@
+#'Need to add useful documentation...
 #'Generic function to submit an API request.
 #'Your credentials should be an object of class AWSRootCredentials or AWSTemporaryCredentials.
 #'How API query requests work:
 #'http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html
+#' @export
 awsRestRequest <- function(
         credentials,
         httpMethod = "GET",

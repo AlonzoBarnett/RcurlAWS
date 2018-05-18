@@ -1,14 +1,17 @@
 Package: RcurlAWS
 Type: Package
-Title: Interface for R to AWS focused on credential management and generic API requests.
+Title: Interface for R to AWS focused on capabilities needed for effective S3 use.
 Version: 0.1
-Date: 2018-04-14
-Authors@R: person("Alonzo", "Barnett", email = "alonzo.r.barnett@gmail.com", role = c("aut", "cre"))
-Description: Aws Root and Temporary credential management implemented using R6  
-    classes. STS is used to generate temporary credentials.  Provides functionality  
-    to authorize API requests and a high-level function (awsRestRequest) as a generic request handler.
-Depends: R (>= 3.4.4)
+Date: 2015-09-09
+Author: Alonzo Barnett
+Maintainer: Alonzo Barnett <abarnett@lexmark.com>
+Description: Aws Root and Temporary credential management implemented using R6
+    classes. S3 request, S3 multihandle requests for async d/l, get requests
+    are returned in-memory. Some c++ based functionality is used to speed up
+    S3 Signaure4 authentication. STS is used to generate temporary credentials.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Imports: RCurl, digest, R6
+Suggests: data.table, jsonlite
+RoxygenNote: 6.0.1.9000

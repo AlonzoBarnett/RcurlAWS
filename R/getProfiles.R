@@ -16,11 +16,10 @@
 #'     credentialFileName = 'specialNameCredentials',
 #'     configFileName = 'specialNameConfig'
 #' )
-#'
-#' Maybe you don't have a config file, below processes the credential file and prints a soft warning about missing config.
+#' 
+#' #Maybe you don't have a config file, below processes the credential file and prints a soft warning about missing config.
 #' getProfiles(configFileName = NULL)
 #'
-#' @export
 getProfiles <- function(prefix = NULL, credentialFileName = NULL, configFileName = NULL, profileName = NULL) {
     if (is.null(credentialFileName)){
         credentialFileName <- 'credentials'
