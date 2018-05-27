@@ -4,13 +4,28 @@
 #'
 #'AWS signature 4:
 #'http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-header-based-auth.html
+#'
+#' Will default to region 'us-east-1' if no 'REGION' found in discovered profile settings.
+#'
+#'@param httpMethod string Generic as described in https://www.tutorialspoint.com/http/http_methods.htm; actual methods are specific to the  AWS Rest API.
+#'
 authorization <- function(
-		credentials, httpMethod = "GET", region = "us-east-1",
-		service = "s3", host = "amazonaws.com", bucket = NULL, path = NULL,
-		queryParameters = NULL, content = NULL, headers = NULL
+		credentials, httpMethod = "GET",
+		service = "s3", host = "amazonaws.com",
+		path = NULL, queryParameters = NULL,
+		content = NULL, headers = NULL
 	) {
     
-    requestDTTM <- format(Sys.time(), tz = "UTC")	
+    if (!isCredClass(credentials)) {
+        stop("\"credentials\" must be class of AWS(Root|Temporary)Credentials.")
+    }
+    
+	region <- credentials[['profileSettings']][['REGION']]
+	if (is.null(region)) {
+		region <- 'us-east-1'
+	}
+    
+    requestDTTM <- format(Sys.time(), tz = "UTC")
     canonicalURI <- ifelse(is.null(path), "/", URLencode(sprintf("/%s", path)))
 	
 	canonicalQueryString <- ""

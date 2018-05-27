@@ -1,6 +1,7 @@
 #'Need to add useful documentation...
 #'Generic function to submit an API request.
 #'Your credentials should be an object of class AWSRootCredentials or AWSTemporaryCredentials.
+#'Temporary credential expiration is handled prior to configuring an API request by calling rotate() method.
 #'How API query requests work:
 #'http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html
 #' @export
@@ -8,10 +9,8 @@ awsRestRequest <- function(
         credentials,
         httpMethod = "GET",
         protocol = "https",
-        region = "us-east-1",
         service = "s3",
         host = "amazonaws.com",
-        bucketName = NULL,
         path = NULL,
         optionalParams = NULL,
         optionalHeaders = NULL,
@@ -19,13 +18,19 @@ awsRestRequest <- function(
         conversionFUN = NULL
 	) {
     
-    if (!any(grepl("^AWS(Root|Temporary)Credentials$", class(credentials))))
-        stop("Requires class of AWS(Root|Temporary)Credentials.")
+    if (!isCredClass(credentials)) {
+        stop("\"credentials\" must be class of AWS(Root|Temporary)Credentials.")
+    }
+    
+    if (isTempCred(credentials)) {
+        if (credentials$hasExpired()) {
+            credentials$rotate()
+        }
+    }
     
     internalURI <- paste0(
         protocol,
         "://",
-	    if (!is.null(bucketName)) sprintf("%s.", bucketName),
 		service,
         ".",
         host,
@@ -35,8 +40,7 @@ awsRestRequest <- function(
 	
 	headers <- authorization(
         credentials = credentials, httpMethod = httpMethod,
-        host = host, bucket = bucketName, path = path,
-	    service = service, headers = optionalHeaders,
+        host = host, path = path, service = service, headers = optionalHeaders,
         content = content, queryParameters = optionalParams
     )
 	
