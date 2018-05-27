@@ -1,7 +1,7 @@
 ### RcurlAWS
 RcurlAWS is a package for R intended to facilitate use of AWS services without external dependencies.
 
-Primary development is around credential management (both root and STS) and generic API requests.
+Primary development is around credential management (both root and STS), somewhat robust use of cerdential/config files, and generic API requests.
 
 Aws Root and Temporary credential management implemented using R6 classes.  STS is supported to generate temporary credentials.
 
@@ -19,8 +19,7 @@ Want to try out RcurlAWS
 #https://www.rstudio.com/products/rpackages/devtools/
 
 #RcurlAWS is hosted internally on Git.
-devtools::install_git("https://github.com/AlonzoBarnett/RcurlAWS.git")
-
+devtools::install_github("AlonzoBarnett/RcurlAWS", ref = 'prep_initial_commit')
 ```
 ### Tutorial
 
