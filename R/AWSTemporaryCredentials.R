@@ -22,7 +22,7 @@
 tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, RoleSessionName = NULL, MFADeviceSerialNumber = NULL, Duration = "3600") { 
     
     #If you are rotating credentials, this will just use what is stored within the object.   
-    if (class(private$rootCredentials)[1] == "AWSRootCredentials") {
+    if (isRootCred(private$rootCredentials)) {
         tmpcreds <- getSTSCredentials(
             rootCredentials = private$rootCredentials,
             roleArn = private$roleArn,
@@ -34,7 +34,7 @@ tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, RoleSe
     
     #If you are initializing temporary credentials, this will use the parameters you pass for the STS call
     #    and store those parameters for future use. 
-    if (class(rootCredentials)[1] == "AWSRootCredentials") {
+    if (isRootCred(rootCredentials)) {
         tmpcreds <- getSTSCredentials(
             rootCredentials = rootCredentials,
             roleArn = roleArn,
@@ -92,14 +92,14 @@ tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, RoleSe
 #' @param Duration (string) Duration, in seconds, of the role session; controls time-to-expire of temporary credentials.
 #'
 #'@details
-#' For additional information on STS requests refer to [STS Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html)
-#' Initializes a call to STS or pulls instance meta data.
-#'    Exactly which depends on the arguments you pass.
-#' 1. If root credentials are passed, it will call STS.
-#'    - Only the root credentials and roleArn are required.
-#'    - If you have an account with MFA, you must pass your MFA SN.
-#'    - This only works with Assume Role for now, thus the requirement of a roleARN.
-#' 2. Otherwise, it will try to curl instance metadata and get temporary credentials from there.
+#' For additional information on STS requests refer to \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html}{STS Requests}  
+#' Initializes a call to STS or pulls instance meta data.  
+#'    Exactly which depends on the arguments you pass.  
+#' 1. If root credentials are passed, it will call STS.  
+#'    - Only the root credentials and roleArn are required.  
+#'    - If you have an account with MFA, you must pass your MFA SN.  
+#'    - This only works with Assume Role for now, thus the requirement of a roleARN.  
+#' 2. Otherwise, it will try to curl instance metadata and get temporary credentials from there.  
 #'
 #'\code{$print()} similar behavior to \code{\link{AWSRootCredentials}}
 #'\code{$hasExpired()} boolean check of stale temporary credentials
