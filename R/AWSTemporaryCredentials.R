@@ -61,6 +61,7 @@ tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, RoleSe
     if (is.null(rootCredentials) & is.null(private$rootCredentials)) 
         tmpcreds <- credsFromInstanceMetadata()
     
+    self$profileSettings <- rootCredentials[['profileSettings']]
     self$LastUpdated <- tmpcreds$LastUpdated
     self$AWS_ACCESS_KEY_ID <- tmpcreds$AWS_ACCESS_KEY_ID
     self$AWS_SECRET_ACCESS_KEY <- tmpcreds$AWS_SECRET_ACCESS_KEY
@@ -109,6 +110,8 @@ tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, RoleSe
 AWSTemporaryCredentials <- R6::R6Class(
     "AWSTemporaryCredentials",
     public = list(
+        profile = NULL,
+        profileSettings = NULL,
         LastUpdated = NULL,
         AWS_ACCESS_KEY_ID = NULL,
         AWS_SECRET_ACCESS_KEY = NULL,
