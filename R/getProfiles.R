@@ -59,10 +59,6 @@ getProfiles <- function(prefix = NULL, credentialFileName = NULL, configFileName
         }
     }
     
-    if (!is.null(profileName)) {
-        tmpInfo[['credentialLoc']][names(tmpInfo[['credentialLoc']]) != profileName] <- NULL
-    }
-    
     #If a config identifies a source profile, we need to add options from that source profile.
     #Options in the source profile will override matching settings.
     for (profileName in names(tmpInfo[['credentialLoc']])) {
@@ -72,6 +68,10 @@ getProfiles <- function(prefix = NULL, credentialFileName = NULL, configFileName
                 tmpInfo[['credentialLoc']][[profileName]][[tmpK]] <- sourceProfile[[tmpK]]
             }
         }
+    }
+    
+    if (!is.null(profileName)) {
+        tmpInfo[['credentialLoc']][names(tmpInfo[['credentialLoc']]) != profileName] <- NULL
     }
     
     return(tmpInfo[['credentialLoc']])
