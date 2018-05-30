@@ -21,6 +21,11 @@
 #' getProfiles(configFileName = NULL)
 #'
 getProfiles <- function(prefix = NULL, credentialFileName = NULL, configFileName = NULL, profileName = NULL) {
+    
+    if (is.null(profileName)) {
+        profileName <- 'default'
+    }
+    
     if (is.null(credentialFileName)){
         credentialFileName <- 'credentials'
     }
