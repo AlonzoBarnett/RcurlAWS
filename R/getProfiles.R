@@ -22,10 +22,6 @@
 #'
 getProfiles <- function(prefix = NULL, credentialFileName = NULL, configFileName = NULL, profileName = NULL) {
     
-    if (is.null(profileName)) {
-        profileName <- 'default'
-    }
-    
     if (is.null(credentialFileName)){
         credentialFileName <- 'credentials'
     }
@@ -68,7 +64,8 @@ getProfiles <- function(prefix = NULL, credentialFileName = NULL, configFileName
     #Options in the source profile will override matching settings.
     for (profileName in names(tmpInfo[['credentialLoc']])) {
         if (!is.null(tmpInfo[['credentialLoc']][[profileName]][['source_profile']])) {
-            srcProfile  <- tmpInfo[['credentialLoc']][[profileName]][['source_profile']]
+            srcProfileName  <- tmpInfo[['credentialLoc']][[profileName]][['source_profile']]
+            sourceProfile <- tmpInfo[['credentialLoc']][[srcProfileName]]
             for (tmpK in names(sourceProfile)) {
                 tmpInfo[['credentialLoc']][[profileName]][[tmpK]] <- sourceProfile[[tmpK]]
             }
