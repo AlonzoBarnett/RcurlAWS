@@ -2,7 +2,6 @@
 #' @description Initializes a call to STS or pulls instance meta data
 #' @param rootCredentials (AWSRootCredentials) Your root credential object to feed STS calls
 #' @param roleArn (string) the ARN of the role you want to assume
-#' @param RoleSessionName (string) An identifier for the request; this can be used for user auditing on AWS.
 #' @param MFADeviceSerialNumber (string) The id number (serial | arn) of your MFA device.
 #' @param Duration (string) Duration, in seconds, of the role session; controls time-to-expire of temporary credentials.
 #'
@@ -96,7 +95,6 @@ tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, MFADev
 #'
 #' @param rootCredentials (AWSRootCredentials) Your root credential object to feed STS calls
 #' @param roleArn (string) the ARN of the role you want to assume
-#' @param RoleSessionName (string) An identifier for the request; this can be used for user auditing on AWS.
 #' @param MFADeviceSerialNumber (string) The id number (serial | arn) of your MFA device.
 #' @param Duration (string) Duration, in seconds, of the role session; controls time-to-expire of temporary credentials.
 #'
