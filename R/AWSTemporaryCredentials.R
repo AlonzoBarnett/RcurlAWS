@@ -57,7 +57,7 @@ tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, MFADev
                 "%s_%s",
                 rootCredentials$AWS_ACCESS_KEY_ID,
                 format(Sys.time(), '%Y%m%d_%H%M%S')
-            ),
+            )
             private$MFADeviceSerialNumber <- MFADeviceSerialNumber
             private$Duration <- Duration
         }
