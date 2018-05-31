@@ -44,12 +44,6 @@ getProfiles <- function(prefix = NULL, credentialFileName = NULL, configFileName
     }
     
     #If a config file is found, combine the profile settings with those found in the credentials file.
-    #Keywords may preceed the actual profile name, I just cut any leading words out.
-    configProfileNames <- names(tmpInfo[['configLoc']])
-    configProfileNames <- strsplit(configProfileNames, "\\s+")
-    configProfileNames <- sapply(configProfileNames, function(x){ x[[length(x)]] })
-    names(tmpInfo[['configLoc']]) <- configProfileNames
-    
     for (config in names(tmpInfo[['configLoc']])) {
         if (!config %in% names(tmpInfo[['credentialLoc']])) { #no guarantee someone will have consistent profile names in config/credentials.
             tmpInfo[['credentialLoc']][[config]] <- list()
@@ -63,8 +57,8 @@ getProfiles <- function(prefix = NULL, credentialFileName = NULL, configFileName
     #If a config identifies a source profile, we need to add options from that source profile.
     #Options in the source profile will override matching settings.
     for (profileName in names(tmpInfo[['credentialLoc']])) {
-        if (!is.null(tmpInfo[['credentialLoc']][[profileName]][['source_profile']])) {
-            srcProfileName  <- tmpInfo[['credentialLoc']][[profileName]][['source_profile']]
+        if (!is.null(tmpInfo[['credentialLoc']][[profileName]][['SOURCE_PROFILE']])) {
+            srcProfileName  <- tmpInfo[['credentialLoc']][[profileName]][['SOURCE_PROFILE']]
             sourceProfile <- tmpInfo[['credentialLoc']][[srcProfileName]]
             for (tmpK in names(sourceProfile)) {
                 tmpInfo[['credentialLoc']][[profileName]][[tmpK]] <- sourceProfile[[tmpK]]
