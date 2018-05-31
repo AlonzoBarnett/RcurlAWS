@@ -44,10 +44,10 @@ authorization <- function(
 	}
     
 	defaultHeaders <- c(
-		host = ifelse(!is.null(bucket), paste(bucket, service, host, sep = "."),
-		paste(service, host, sep = ".")),
+		host = paste(service, host, sep = "."),
 	    "x-amz-content-sha256" = hashedPayload,
-		"x-amz-date" = strftime(requestDTTM, "%Y%m%dT%H%M%SZ"))
+		"x-amz-date" = strftime(requestDTTM, "%Y%m%dT%H%M%SZ")
+	)
     
     if (!is.null(credentials$Token)) {
         defaultHeaders['x-amz-security-token'] <- credentials$Token
