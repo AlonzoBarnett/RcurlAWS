@@ -19,7 +19,7 @@
 #'
 #' For additional information on STS requests refer to [STS Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html)
 #'
-tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, RoleSessionName = NULL, MFADeviceSerialNumber = NULL, Duration = "3600") { 
+tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, MFADeviceSerialNumber = NULL, Duration = "3600") { 
     
     #If you are rotating credentials, this will just use what is stored within the object.   
     if (isRootCred(private$rootCredentials)) {
@@ -38,7 +38,11 @@ tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, RoleSe
         tmpcreds <- getSTSCredentials(
             rootCredentials = rootCredentials,
             roleArn = roleArn,
-            RoleSessionName = RoleSessionName,
+            RoleSessionName = sprintf(
+                "%s_%s",
+                rootCredentials$AWS_ACCESS_KEY_ID,
+                format(Sys.time(), '%Y%m%d_%H%M%S')
+            ),
             MFADeviceSerialNumber = MFADeviceSerialNumber,
             Duration = Duration
         )
@@ -50,7 +54,11 @@ tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, RoleSe
                 AWS_SECRET_ACCESS_KEY = rootCredentials$AWS_SECRET_ACCESS_KEY
             )
             private$roleArn <- roleArn
-            private$RoleSessionName <- RoleSessionName
+            private$RoleSessionName <- sprintf(
+                "%s_%s",
+                rootCredentials$AWS_ACCESS_KEY_ID,
+                format(Sys.time(), '%Y%m%d_%H%M%S')
+            ),
             private$MFADeviceSerialNumber <- MFADeviceSerialNumber
             private$Duration <- Duration
         }
