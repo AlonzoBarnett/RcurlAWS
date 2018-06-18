@@ -44,7 +44,7 @@ awsRestRequest <- function(
         content = content, queryParameters = optionalParams
     )
 	
-    h <- curl::new_handle()
+    h <- curl::new_handle(failonerror = TRUE)
     
     curl::handle_setheaders(h, .list = headers)
     
