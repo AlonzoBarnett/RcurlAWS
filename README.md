@@ -30,34 +30,38 @@ RcurlAWS contains the typical R-style documentation, .Rd help files.  So if you 
 ```R
 library(RcurlAWS)
 
-awsCreds <- AWSTemporaryCredentials$new()
-#With an instance IAM profile, it is just that easy.
-#If you are running a session for a long time and the credentials may expire and need to be rotated,
-#   use something like the below to refresh the S3 temp credentials.
-#   With instance profile derived object, user doesn't need to interact.
+#With an instance IAM profile, invoking credentials is as easy as:
 
-if (awsCreds$hasExpired()) awsCreds$rotate()
+awsCreds <- AWSTemporaryCredentials$new()
+
+#Temp credential expiration/rotation is handled in the awsRestRequest, so you shouldn't need to repeatedly check.
 
 ```
 
 #### AWS Credentials using Root access and secret from a file with profiles AND STS assumed role
 ```R
-rootCreds <- AWSRootCredentials$new(sourceFile = "...path_to_credential_file...")
+
+#Assuming you are using the default setup for config/credentials files:
+rootCreds <- AWSRootCredentials$new()
+
+rootCreds <- AWSRootCredentials$new(profileName = 'psmDataScientist')
+
 #Make an STS call to generate temp credentials.
-awsCreds <- AWSTemporaryCredentials$new(rootCreds,
-    roleArn = '...arn_for_IAMRole...',
-    RoleSessionName = sprintf("%s_tmpSession_%s", rootCreds$AWS_ACCESS_KEY_ID, format(Sys.time(), '%Y%m%d_%H%M%S')), #should just put this in the method.
-    MFADeviceSerialNumber = "...arn_for_MFADevice..."
+#If you store MFA/role information in your config/credential files,
+#  the information will be available in your root cred object.
+awsCreds <- AWSTemporaryCredentials$new(
+    rootCreds,
+    roleArn = rootCreds[['profileSettings']][['ROLE_ARN']],
+    MFADeviceSerialNumber = rootCreds[['profileSettings']][['MFA_SERIAL']]
 )
 
 #
-#If you are running a session for a long time and the credentials may expire and need to be rotated,
+#If you want to try rotating temp credentials manually,
 #   use something like the below to refresh the S3 temp credentials.
-#   You will be asked for a MFA Token if you are running with an IAM profile.
+#   You will be asked for a MFA Token if one is necessary.
 
 if (awsCreds$hasExpired()) awsCreds$rotate()
 
-###Should I embedd this as well? Can go ahead and rotate is MFA token isn't necessary...
 ```
 
 awsRestRequest is a generic function for AWS Rest-ful API requests, but the default parameters are setup to GET an object from S3. Test this out by pulling a file from S3 (in the data-science account).
