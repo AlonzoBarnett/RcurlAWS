@@ -18,7 +18,7 @@ Want to try out RcurlAWS
 #Don't have the devtools package yet? To get going, check out:
 #https://www.rstudio.com/products/rpackages/devtools/
 
-#RcurlAWS is hosted internally on Git.
+#RcurlAWS is hosted on Git.
 devtools::install_github("AlonzoBarnett/RcurlAWS", ref = 'prep_initial_commit')
 ```
 ### Tutorial
