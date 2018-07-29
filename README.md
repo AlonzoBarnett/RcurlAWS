@@ -1,4 +1,4 @@
-### RcurlAWS
+# RcurlAWS
 RcurlAWS is a package for R intended to facilitate use of AWS services without external dependencies.
 
 Primary development is around credential management (both root and STS), somewhat robust use of cerdential/config files, and generic API requests.
@@ -10,7 +10,7 @@ Helper functions to access AWS services via Rcurl -> libcurl -> Rest API
 -In theroy any HTTP(S) style request to the AWS REST API is possible with the worker functions.  
 -I plan to add high-level functionality (via wrappers [eventually documented]) as I need probably in other linkes libraries specific to the AWS service being invoked like S3, SQS, etc.  
  
-### Install
+## Install
 
 Want to try out RcurlAWS
 
@@ -21,11 +21,11 @@ Want to try out RcurlAWS
 #RcurlAWS is hosted on Git.
 devtools::install_github("AlonzoBarnett/RcurlAWS", ref = 'prep_initial_commit')
 ```
-### Tutorial
+## Tutorial
 
 RcurlAWS contains the typical R-style documentation, .Rd help files.  So if you are unsure what to do just type ?RcurlAWS.  There are credential manager classes which facilitate use of STS with Root credentials.
 
-#### AWS Credentials on an EC2 using IAM
+### AWS Credentials on an EC2 using an IAM Profile
 
 ```R
 library(RcurlAWS)
@@ -38,8 +38,9 @@ awsCreds <- AWSTemporaryCredentials$new()
 
 ```
 
-#### AWS Credentials using Root access and secret from a file with profiles AND STS assumed role
+### AWS Credentials using Root access and secret from a file with profiles AND STS assumed role
 ```R
+library(RcurlAWS)
 
 #Assuming you are using the default setup for config/credentials files:
 rootCreds <- AWSRootCredentials$new()
@@ -58,37 +59,24 @@ awsCreds <- AWSTemporaryCredentials$new(
 #
 #If you want to try rotating temp credentials manually,
 #   use something like the below to refresh the S3 temp credentials.
-#   You will be asked for a MFA Token if one is necessary.
+#   You will be asked for an MFA Token if one is necessary.
 
 if (awsCreds$hasExpired()) awsCreds$rotate()
 
 ```
 
-awsRestRequest is a generic function for AWS Rest-ful API requests, but the default parameters are setup to GET an object from S3. Test this out by pulling a file from S3 (in the data-science account).
+awsRequest is the low level function that specialized service handlers use.  This is similar to how AWS SDKs have specific modules for each service.  As a generic function, awsRestRequest, can be used to make most AWS Rest-ful API requests.  The default parameters are setup to GET an object from S3. Test this out by listing objects in a public bucket.
 
 ```R
-exFile <- awsRestRequest(
+
+#To pull the object, we feed awsRestRequest the path (bucket name + the object key)
+#This returns a raw object with a bunch of binary data.
+myObj <- awsRestRequest(
     credentials = awsCreds,
-    bucketName = 'datasets.elasticmapreduce',
-    path = 'hc_metadata/2017/04/17/00/hc_metadata_2017-04-17_00-25-28_ce55ff92-2306-11e7-a536-0aa367d0d639_ef4ac2fc-c679-4232-9861-c7038efe1e3e.json.log.gz'
+    path = 'gdelt-open-data/events/20150906.export.csv')
 )
 
-s3://datasets.elasticmapreduce/ngrams/books/
-s3://datasets.elasticmapreduce/ngrams/books/20090715/chinese/1gram/data
+#Without passing a conversion function to awsRestRequest, it is up to you to convert the raw object response to something R can understand.
+myData <- read.delim(textConnection(rawToChar(myObj)), header = F)
 
-#This returns a raw object with a bunch of binary data
-#  if no conversion function was passed.
-#Converting in-memory isn't a huge problem,
-#  but there are a handful of function in the package
-#  to make it simpler for formats we commonly see.
-exData <- streamJsonGZ(exFile)
-
-#To save yourself some trouble, system memory,
-#  and boilerplate pass your conversion function to awsRestRequest:
-exData <- awsRestRequest(
-    credentials = awsCreds,
-    bucketName = 'dev-ds-lxk-psm-argus-datalogs-field',
-    path = 'hc_metadata/2017/04/17/00/hc_metadata_2017-04-17_00-25-28_ce55ff92-2306-11e7-a536-0aa367d0d639_ef4ac2fc-c679-4232-9861-c7038efe1e3e.json.log.gz',
-    conversionFUN = streamJsonGZ
-)
 ```
