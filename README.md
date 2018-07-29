@@ -65,7 +65,11 @@ if (awsCreds$hasExpired()) awsCreds$rotate()
 
 ```
 
-awsRequest is the low level function that specialized service handlers use.  This is similar to how AWS SDKs have specific modules for each service.  As a generic function, awsRestRequest, can be used to make most AWS Rest-ful API requests.  The default parameters are setup to GET an object from S3. Test this out by listing objects in a public bucket.
+### awsRestRequest Example  
+
+awsRequest is the low level function that specialized service handlers use.  Spirit of design is similar to how AWS SDKs have specific modules for each service.  As a generic function, awsRestRequest, can be used to make most AWS Rest-ful API requests.  
+
+The default parameters are setup to GET an object from S3.  The below example uses public data stored in AWS S3.  The examle object is from the [Global Database of Events, Language and Tone (GDELT) "GDELT"](https://registry.opendata.aws/gdelt/).  
 
 ```R
 
