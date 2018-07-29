@@ -33,3 +33,6 @@ vignettes/*.pdf
 *.knit.md
 
 .vscode
+
+#The devCode dir.
+devCode
