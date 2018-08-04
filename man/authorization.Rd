@@ -6,11 +6,17 @@
 Your credentials should be a list object with names of 'access' and 'secret'.
 This function is not intended to be called directly; it is called by awsRestRequest}
 \usage{
-authorization(credentials, httpMethod = "GET", region = "us-east-1",
-  service = "s3", host = "amazonaws.com", bucket = NULL, path = NULL,
-  queryParameters = NULL, content = NULL, headers = NULL)
+authorization(credentials, httpMethod = "GET", service = "s3",
+  host = "amazonaws.com", path = NULL, queryParameters = NULL,
+  content = NULL, headers = NULL)
+}
+\arguments{
+\item{httpMethod}{string Generic as described in https://www.tutorialspoint.com/http/http_methods.htm; actual methods are specific to the  AWS Rest API.}
 }
 \description{
 AWS signature 4:
 http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-header-based-auth.html
+}
+\details{
+Will default to region 'us-east-1' if no 'REGION' found in discovered profile settings.
 }

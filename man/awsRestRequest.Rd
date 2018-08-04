@@ -5,18 +5,20 @@
 \title{Need to add useful documentation...
 Generic function to submit an API request.
 Your credentials should be an object of class AWSRootCredentials or AWSTemporaryCredentials.
+Temporary credential expiration is handled prior to configuring an API request by calling rotate() method.
 How API query requests work:
 http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html}
 \usage{
 awsRestRequest(credentials, httpMethod = "GET", protocol = "https",
-  region = "us-east-1", service = "s3", host = "amazonaws.com",
-  bucketName = NULL, path = NULL, optionalParams = NULL,
-  optionalHeaders = NULL, content = NULL, conversionFUN = NULL)
+  service = "s3", host = "amazonaws.com", path = NULL,
+  optionalParams = NULL, optionalHeaders = NULL, content = NULL,
+  conversionFUN = NULL)
 }
 \description{
 Need to add useful documentation...
 Generic function to submit an API request.
 Your credentials should be an object of class AWSRootCredentials or AWSTemporaryCredentials.
+Temporary credential expiration is handled prior to configuring an API request by calling rotate() method.
 How API query requests work:
 http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html
 }

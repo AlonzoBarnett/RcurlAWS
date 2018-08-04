@@ -5,14 +5,12 @@
 \title{tempCredentialHandler}
 \usage{
 tempCredentialHandler(rootCredentials = NULL, roleArn = NULL,
-  RoleSessionName = NULL, MFADeviceSerialNumber = NULL, Duration = "3600")
+  MFADeviceSerialNumber = NULL, Duration = "3600")
 }
 \arguments{
 \item{rootCredentials}{(AWSRootCredentials) Your root credential object to feed STS calls}
 
 \item{roleArn}{(string) the ARN of the role you want to assume}
-
-\item{RoleSessionName}{(string) An identifier for the request; this can be used for user auditing on AWS.}
 
 \item{MFADeviceSerialNumber}{(string) The id number (serial | arn) of your MFA device.}
 
