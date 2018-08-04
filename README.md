@@ -55,20 +55,13 @@ awsCreds <- AWSTemporaryCredentials$new(
     MFADeviceSerialNumber = rootCreds[['profileSettings']][['MFA_SERIAL']]
 )
 
-#
-#If you want to try rotating temp credentials manually,
-#   use something like the below to refresh the S3 temp credentials.
-#   You will be asked for an MFA Token if one is necessary.
-
-if (awsCreds$hasExpired()) awsCreds$rotate()
-
 ```
 
 ### awsRestRequest Example  
 
 awsRequest is the low level function that specialized service handlers use.  Spirit of design is similar to how AWS SDKs have specific modules for each service.  As a generic function, awsRestRequest, can be used to make most AWS Rest-ful API requests.  
 
-The default parameters are setup to GET an object from S3.  The below example uses public data stored in AWS S3.  The examle object is from the [Global Database of Events, Language and Tone (GDELT) "GDELT"](https://registry.opendata.aws/gdelt/).  
+The default parameters are setup to GET an object from S3.  The below example uses public data stored in AWS S3.  The example object is from the [Global Database of Events, Language and Tone (GDELT) "GDELT"](https://registry.opendata.aws/gdelt/).  
 
 ```R
 
