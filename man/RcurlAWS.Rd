@@ -13,7 +13,7 @@ Helper functions to access AWS services via package::curl
 
 \itemize{
   \item limited functionality is implemented in wrappers which obscure the worker functions 
-  \itemIn theroy any HTTP(S) style request to the AWS REST API is possible with awsRestRequest 
+  \item In theroy any HTTP(S) style request to the AWS REST API is possible with awsRestRequest 
   \item NEED TO add service-level [S3, SQS, etc.] modules 
   \item NEED TO ensuring all settings in a config file are used in service calls 
 }
