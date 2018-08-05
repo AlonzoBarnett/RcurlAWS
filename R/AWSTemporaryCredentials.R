@@ -104,8 +104,8 @@ tempCredentialHandler <- function(rootCredentials = NULL, roleArn = NULL, MFADev
 #' @param Duration (string) Duration, in seconds, of the role session; controls time-to-expire of temporary credentials.
 #'
 #'@details
-#' For additional information on STS requests refer to:
-#'    \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html}{STS Requests}  
+#' For additional information on STS requests refer to:  
+#'    \url{https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html}  
 #' Initializes a call to STS or pulls instance meta data. Exactly which depends on the arguments you pass.  
 #' \enumerate{
 #'   \item If root credentials are passed, it will call STS.
