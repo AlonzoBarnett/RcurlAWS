@@ -31,3 +31,13 @@ genCredentialFilePath(
 )
 
 }
+\seealso{
+Other credential management functions: \code{\link{AWSRootCredentials}},
+  \code{\link{AWSTemporaryCredentials}},
+  \code{\link{credsFromInstanceMetadata}},
+  \code{\link{getCredentials}}, \code{\link{getProfiles}},
+  \code{\link{getSTSCredentials}},
+  \code{\link{parseCredentialFile}},
+  \code{\link{tempCredentialHandler}}
+}
+\concept{credential management functions}

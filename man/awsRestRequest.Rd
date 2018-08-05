@@ -22,3 +22,7 @@ Temporary credential expiration is handled prior to configuring an API request b
 How API query requests work:
 http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html
 }
+\seealso{
+Other service wrappers: \code{\link{getSTSCredentials}}
+}
+\concept{service wrappers}

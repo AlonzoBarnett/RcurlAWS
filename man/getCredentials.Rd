@@ -26,3 +26,14 @@ Worker function to find credentials in multiple search locations.
 \details{
 The initializer function of AWSRootCredentials object.
 }
+\seealso{
+Other credential management functions: \code{\link{AWSRootCredentials}},
+  \code{\link{AWSTemporaryCredentials}},
+  \code{\link{credsFromInstanceMetadata}},
+  \code{\link{genCredentialFilePath}},
+  \code{\link{getProfiles}},
+  \code{\link{getSTSCredentials}},
+  \code{\link{parseCredentialFile}},
+  \code{\link{tempCredentialHandler}}
+}
+\concept{credential management functions}

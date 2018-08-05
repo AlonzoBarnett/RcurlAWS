@@ -9,6 +9,8 @@
 #'
 #'@param httpMethod string Generic as described in https://www.tutorialspoint.com/http/http_methods.htm; actual methods are specific to the  AWS Rest API.
 #'
+#'@family authorization functions
+#'
 authorization <- function(
 		credentials, httpMethod = "GET",
 		service = "s3", host = "amazonaws.com",

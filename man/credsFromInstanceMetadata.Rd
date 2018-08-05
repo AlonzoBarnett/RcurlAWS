@@ -2,12 +2,20 @@
 % Please edit documentation in R/credsFromInstanceMetadata.R
 \name{credsFromInstanceMetadata}
 \alias{credsFromInstanceMetadata}
-\title{Uses curl to pull EC2 instance metadata which contains access, secret,
-   and token for the Instance Role... not using a role, shame on you.}
+\title{Uses curl to pull EC2 instance metadata which contains access, secret, and token for the Instance Role... not using a role, shame on you.}
 \usage{
 credsFromInstanceMetadata()
 }
 \description{
-Uses curl to pull EC2 instance metadata which contains access, secret,
-   and token for the Instance Role... not using a role, shame on you.
+Uses curl to pull EC2 instance metadata which contains access, secret, and token for the Instance Role... not using a role, shame on you.
 }
+\seealso{
+Other credential management functions: \code{\link{AWSRootCredentials}},
+  \code{\link{AWSTemporaryCredentials}},
+  \code{\link{genCredentialFilePath}},
+  \code{\link{getCredentials}}, \code{\link{getProfiles}},
+  \code{\link{getSTSCredentials}},
+  \code{\link{parseCredentialFile}},
+  \code{\link{tempCredentialHandler}}
+}
+\concept{credential management functions}

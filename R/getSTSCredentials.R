@@ -1,6 +1,8 @@
 #'The structure of an STS request and response is fully described at:
 #'http://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
 #'
+#' @family credential management functions
+#' @family service wrappers
 getSTSCredentials <- function(rootCredentials = NULL, roleArn = NULL, RoleSessionName = NULL, MFADeviceSerialNumber = NULL, Duration = "3600") {
     
     stsContent <- stsGenContentString(

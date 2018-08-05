@@ -10,6 +10,7 @@
 #' It is assumed your credentials file follows the guidelines at:
 #' [AWS CLI Configuration and Credential Files](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html)
 #'
+#' @family credential management functions
 #' @examples
 #' getProfiles(
 #'     prefix = '/path/to/files',

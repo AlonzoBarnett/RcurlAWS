@@ -20,3 +20,4 @@ http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-header-based-auth.html
 \details{
 Will default to region 'us-east-1' if no 'REGION' found in discovered profile settings.
 }
+\concept{authorization functions}

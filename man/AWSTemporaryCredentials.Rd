@@ -33,17 +33,31 @@ R6 implementation of AWS Temporary Credential searches and management
 \code{AWSTemporaryCredentials$rotate()}
 }
 \details{
-For additional information on STS requests refer to \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html}{STS Requests}  
-Initializes a call to STS or pulls instance meta data.  
-   Exactly which depends on the arguments you pass.  
-1. If root credentials are passed, it will call STS.  
-   - Only the root credentials and roleArn are required.  
-   - If you have an account with MFA, you must pass your MFA SN.  
-   - This only works with Assume Role for now, thus the requirement of a roleARN.  
-2. Otherwise, it will try to curl instance metadata and get temporary credentials from there.  
+For additional information on STS requests refer to:
+   \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html}{STS Requests}  
+Initializes a call to STS or pulls instance meta data. Exactly which depends on the arguments you pass.  
+\enumerate{
+  \item If root credentials are passed, it will call STS.
+      \itemize{
+        \item Only the root credentials and roleArn are required.
+        \item If you have an account with MFA, you must pass your MFA SN.
+        \item This only works with Assume Role for now, thus the requirement of a roleARN.
+      }
+  \item Otherwise, it will try to curl instance metadata and get temporary credentials from there.
+}
 
 \code{$print()} similar behavior to \code{\link{AWSRootCredentials}}
 \code{$hasExpired()} boolean check of stale temporary credentials
 \code{$rotate()} invokes the initilization function again, but should retain knowledge of Root Credentials if used.
 }
+\seealso{
+Other credential management functions: \code{\link{AWSRootCredentials}},
+  \code{\link{credsFromInstanceMetadata}},
+  \code{\link{genCredentialFilePath}},
+  \code{\link{getCredentials}}, \code{\link{getProfiles}},
+  \code{\link{getSTSCredentials}},
+  \code{\link{parseCredentialFile}},
+  \code{\link{tempCredentialHandler}}
+}
+\concept{credential management functions}
 \keyword{datasets}

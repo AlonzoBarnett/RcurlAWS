@@ -1,4 +1,5 @@
 #Need to add documentation...
+#' @family credential management functions
 getMFAToken <- function(){
     #based on:
     # https://stackoverflow.com/questions/16847621/get-data-out-of-a-tcltk-function

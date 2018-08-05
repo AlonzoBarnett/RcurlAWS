@@ -1,6 +1,8 @@
 #' This isn't a super robust file parser, but will work well if AWS credential|config file guidelines are followed.
 #' read lines of the credential or config file then iterate over forming a list of profiles.
 #'
+#' @family credential management functions
+#'
 parseCredentialFile <- function(filePath = NULL) {
     tmpFile <- readLines(filePath, warn = F)
     profiles <- list()

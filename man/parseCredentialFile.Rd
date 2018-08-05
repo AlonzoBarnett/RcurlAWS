@@ -11,3 +11,13 @@ parseCredentialFile(filePath = NULL)
 This isn't a super robust file parser, but will work well if AWS credential|config file guidelines are followed.
 read lines of the credential or config file then iterate over forming a list of profiles.
 }
+\seealso{
+Other credential management functions: \code{\link{AWSRootCredentials}},
+  \code{\link{AWSTemporaryCredentials}},
+  \code{\link{credsFromInstanceMetadata}},
+  \code{\link{genCredentialFilePath}},
+  \code{\link{getCredentials}}, \code{\link{getProfiles}},
+  \code{\link{getSTSCredentials}},
+  \code{\link{tempCredentialHandler}}
+}
+\concept{credential management functions}

@@ -4,6 +4,7 @@
 #'Temporary credential expiration is handled prior to configuring an API request by calling rotate() method.
 #'How API query requests work:
 #'http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html
+#' @family service wrappers
 #' @export
 awsRestRequest <- function(
         credentials,

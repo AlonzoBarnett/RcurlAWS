@@ -20,15 +20,28 @@ tempCredentialHandler(rootCredentials = NULL, roleArn = NULL,
 Initializes a call to STS or pulls instance meta data
 }
 \details{
-This function isn't intended to be called directly; it is a method of the AWSTemporaryCredentials class.
-Initializes a call to STS or pulls instance meta data.
-   Exactly which depends on the arguments you pass.
-1. If root credentials are passed, it will call STS.
-   - Only the root credentials and roleArn are required.
-   - If you have an account with MFA, you must pass your MFA SN.
-   - This only works with Assume Role for now, thus the requirement of a roleARN.
-
-2. Otherwise, it will try to curl instance metadata and get temporary credentials from there.
+This function isn't intended to be called directly; it is a method of the AWSTemporaryCredentials class.  
+Initializes a call to STS or pulls instance meta data.  
+   Exactly which depends on the arguments you pass.  
+\enumerate{
+  \item If root credentials are passed, it will call STS.
+      \itemize{
+        \item Only the root credentials and roleArn are required.
+        \item If you have an account with MFA, you must pass your MFA SN.
+        \item This only works with Assume Role for now, thus the requirement of a roleARN.
+      }
+  \item Otherwise, it will try to curl instance metadata and get temporary credentials from there.
+}
 
 For additional information on STS requests refer to [STS Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html)
 }
+\seealso{
+Other credential management functions: \code{\link{AWSRootCredentials}},
+  \code{\link{AWSTemporaryCredentials}},
+  \code{\link{credsFromInstanceMetadata}},
+  \code{\link{genCredentialFilePath}},
+  \code{\link{getCredentials}}, \code{\link{getProfiles}},
+  \code{\link{getSTSCredentials}},
+  \code{\link{parseCredentialFile}}
+}
+\concept{credential management functions}

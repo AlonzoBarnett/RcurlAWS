@@ -12,3 +12,16 @@ getSTSCredentials(rootCredentials = NULL, roleArn = NULL,
 The structure of an STS request and response is fully described at:
 http://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
 }
+\seealso{
+Other credential management functions: \code{\link{AWSRootCredentials}},
+  \code{\link{AWSTemporaryCredentials}},
+  \code{\link{credsFromInstanceMetadata}},
+  \code{\link{genCredentialFilePath}},
+  \code{\link{getCredentials}}, \code{\link{getProfiles}},
+  \code{\link{parseCredentialFile}},
+  \code{\link{tempCredentialHandler}}
+
+Other service wrappers: \code{\link{awsRestRequest}}
+}
+\concept{credential management functions}
+\concept{service wrappers}
