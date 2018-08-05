@@ -1,0 +1,162 @@
+#'@title getCredentials
+#'@description Worker function to find credentials in multiple search locations.
+#'@param AWS_ACCESS_KEY_ID Your AWS root account access id
+#'@param AWS_SECRET_ACCESS_KEY Your AWS root account secret key
+#'@param sourceFile Location of credentials file ex. ~/.aws/.credential
+#'@param profileName Name of the profile you wish to invoke
+#'    'defualt' is used unless otherwise explicitly declared
+#'@param .silent Doesn't do anything but is reserved to warning suppression or verbosity setting
+#'
+#'@details
+#'The initializer function of AWSRootCredentials object.
+#'@family credential management functions
+#'
+getCredentials <- function(
+    AWS_ACCESS_KEY_ID = NULL,
+    AWS_SECRET_ACCESS_KEY = NULL,
+    profileName = NULL, #"default"
+    credentialPrefix = NULL,
+    credentialFileName = NULL,
+    configFileName = NULL
+) {
+    
+    #If explicit credentials passed, just use those.
+    if (!is.null(AWS_ACCESS_KEY_ID) & !is.null(AWS_SECRET_ACCESS_KEY)) {
+        self$AWS_ACCESS_KEY_ID <- AWS_ACCESS_KEY_ID
+        self$AWS_SECRET_ACCESS_KEY <- AWS_SECRET_ACCESS_KEY
+        return(NULL)
+    }
+    
+    #If Profile provided, look for it...
+    if (!is.null(profileName)) {
+        awsProfiles <- getProfiles(credentialPrefix, credentialFileName, configFileName, profileName)
+        if (is.null(awsProfiles)){
+            stop(sprintf('Profile %s not found.'), profileName)
+        }
+        self$profile <- profileName
+        self$profileSettings <- awsProfiles[[profileName]]
+        self$AWS_ACCESS_KEY_ID <- awsProfiles[[profileName]][['AWS_ACCESS_KEY_ID']]
+        self$AWS_SECRET_ACCESS_KEY <- awsProfiles[[profileName]][['AWS_SECRET_ACCESS_KEY']]
+        return(NULL)
+    }
+    
+    #If no arg so far, try env.
+    creds <- Sys.getenv(x = c("AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"))
+    if (any(creds == "")) {
+        creds <- NULL
+    }else{
+        self$AWS_ACCESS_KEY_ID <- creds$AWS_ACCESS_KEY_ID
+        self$AWS_SECRET_ACCESS_KEY <- creds$AWS_SECRET_ACCESS_KEY
+        return(NULL)
+    }
+    
+    #Finally, nothing passed and no env hit, so try default profile lookup.
+    profileName <- 'default'
+    awsProfiles <- getProfiles(credentialPrefix, credentialFileName, configFileName, profileName)
+    if (is.null(awsProfiles)){
+        stop('Credential search failed and no default profile found.')
+    }
+    
+    self$profile <- profileName
+    self$profileSettings <- awsProfiles[[profileName]]
+    self$AWS_ACCESS_KEY_ID <- awsProfiles[[profileName]][['AWS_ACCESS_KEY_ID']]
+    self$AWS_SECRET_ACCESS_KEY <- awsProfiles[[profileName]][['AWS_SECRET_ACCESS_KEY']]
+    return(NULL)
+}
+
+#'@title AWS Root Credential Manager
+#'@description R6 implementation of AWS Root credential searches and management
+#'
+#'\code{AWSRootCredentials$new(AWS_ACCESS_KEY_ID = NULL,
+#'                           AWS_SECRET_ACCESS_KEY = NULL,
+#'                           sourceFile = NULL,
+#'                           profileName = "default",
+#'                           .silent = T)
+#'}
+#'
+#'\code{AWSRootCredentials$print()}
+#'
+#'@param AWS_ACCESS_KEY_ID Your AWS root account access id
+#'@param AWS_SECRET_ACCESS_KEY Your AWS root account secret key
+#'@param sourceFile Location of credentials file ex. ~/.aws/.credential
+#'@param profileName Name of the profile you wish to invoke
+#'    'defualt' is used unless otherwise explicitly declared
+#'
+#'@details
+#' On initialization if you pass an access and secret key,  
+#'     the search is skipped and the keys you passed are used.  
+#'     Print method, prints only *s to protect your keys.  
+#'  
+#' You can use $ to force print of an attribute if you really want to have
+#'     it hanging around on your screen.
+#'  
+#' If no arguments are provided, credential priority... not search order
+#'     but what will be returned if found... is loosely based on typical SDK fashion:
+#'       \enumerate{
+#'           \item Environment variables "AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"
+#'           \item Credentials file
+#'       }
+#'  
+#' It is assumed your credentials file follows the guidelines at:  
+#'     \url{https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html}{AWS CLI Configuration and Credential Files}  
+#'  
+#' If you have multiple profiles in the credentials file,  
+#'     a profile labeled "default" will be searched for UNLESS you explicitly  
+#'     declare the profile name to return.  
+#'
+#' \strong{Differences from SDK Implementations}  
+#'     \enumerate{
+#'       \item If Credentials file pointed to explicitly, then this is the only location checked. This is a more intuative behavior; if I tell you where to look, don't give me results from some other location.
+#'       \item Instance MetaData is not searched; this is done with AWSTemporaryCredentials$new().
+#' }
+#'
+#' AWSRootCredentials are a simpler class of credentials (only access and secret keys are necessary.  
+#' AWSTemporaryCredentials, which are Role based, are generated by STS.  
+#' I opted to treat root and temporary credentials as distinct class references. This seems less confusing for an end-user then trying to track what will be returned by a single class when referencing the two different credential sources.
+#'
+#'@family credential management functions
+#'@examples
+#Will try to find credentials if you don't provide any information.
+#'\dontrun{rootCreds <- AWSRootCredentials$new()}
+#Is probably best to tell it where to look.
+#
+#Windows ex:
+#'\dontrun{rootCreds <- AWSRootCredentials$new(credentialPrefix = "/i/hide/my/files")}
+#'Provide filenames if not using 'config' & 'credentials'
+#'\dontrun{rootCreds <- AWSRootCredentials$new(
+#'    credentialPrefix = "/i/hide/my/files")}
+#'    credentialFileName = 'myCreds',
+#'    configFileName = 'myConfig'
+#')
+#Explicitly pass access and secret:
+#'\dontrun{rootCreds <- AWSRootCredentials$new(AWS_ACCESS_KEY_ID = "blahblah", AWS_SECRET_ACCESS_KEY = "blahblah")}
+#Print method obscures your access and secret for safety
+#'\dontrun{rootCreds}
+#You can force print if you really want ...
+#'\dontrun{rootCreds$AWS_ACCESS_KEY_ID}
+#'\dontrun{rootCreds$AWS_SECRET_ACCESS_KEY}
+#The 'profileSettings' attribute containes the combination of credentials & config for the profile discovered.
+#'rootCreds$profileSettings
+#'
+#' @export
+AWSRootCredentials <- R6::R6Class(
+    "AWSRootCredentials",
+    public = list(
+        profile = NULL,
+        profileSettings = NULL,
+        AWS_ACCESS_KEY_ID = NULL,
+        AWS_SECRET_ACCESS_KEY = NULL,
+        initialize = getCredentials,
+        print = function(...) {
+            cat(
+                "<AWSRootCredentials>\n\tAWS_ACCESS_KEY_ID = ",
+                paste(rep("*", nchar(self$AWS_ACCESS_KEY_ID)), collapse = ""),
+                "\n\tAWS_SECRET_ACCESS_KEY = ",
+                paste(rep("*", nchar(self$AWS_SECRET_ACCESS_KEY)), collapse = ""),
+                "\n",
+                sep = ""
+            )
+            invisible(self)
+        }
+    )
+)
