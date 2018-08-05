@@ -98,7 +98,7 @@ getCredentials <- function(
 #'       }
 #'  
 #' It is assumed your credentials file follows the guidelines at:  
-#'     \href{https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html}{AWS CLI Configuration and Credential Files}  
+#'     \url{https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html}{AWS CLI Configuration and Credential Files}  
 #'  
 #' If you have multiple profiles in the credentials file,  
 #'     a profile labeled "default" will be searched for UNLESS you explicitly  
