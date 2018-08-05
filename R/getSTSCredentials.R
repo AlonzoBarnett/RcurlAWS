@@ -3,6 +3,7 @@
 #'
 #' @family credential management functions
 #' @family service wrappers
+#'
 getSTSCredentials <- function(rootCredentials = NULL, roleArn = NULL, RoleSessionName = NULL, MFADeviceSerialNumber = NULL, Duration = "3600") {
     
     stsContent <- stsGenContentString(

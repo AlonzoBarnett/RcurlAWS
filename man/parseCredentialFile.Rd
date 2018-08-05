@@ -18,6 +18,7 @@ Other credential management functions: \code{\link{AWSRootCredentials}},
   \code{\link{genCredentialFilePath}},
   \code{\link{getCredentials}}, \code{\link{getProfiles}},
   \code{\link{getSTSCredentials}},
+  \code{\link{stsGenContentString}},
   \code{\link{tempCredentialHandler}}
 }
 \concept{credential management functions}

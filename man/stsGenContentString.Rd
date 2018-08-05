@@ -13,3 +13,18 @@ Helper function to generate the content (body) of a STS assume role request.
 This is used to pass MFA device credentials along with the role tto assume in order to generate temporary credentials.
 If a RoleSessionName is not specified, a session uuid is generated.
 }
+\seealso{
+Other credential management functions: \code{\link{AWSRootCredentials}},
+  \code{\link{AWSTemporaryCredentials}},
+  \code{\link{credsFromInstanceMetadata}},
+  \code{\link{genCredentialFilePath}},
+  \code{\link{getCredentials}}, \code{\link{getProfiles}},
+  \code{\link{getSTSCredentials}},
+  \code{\link{parseCredentialFile}},
+  \code{\link{tempCredentialHandler}}
+
+Other service wrappers: \code{\link{awsRestRequest}},
+  \code{\link{getSTSCredentials}}
+}
+\concept{credential management functions}
+\concept{service wrappers}

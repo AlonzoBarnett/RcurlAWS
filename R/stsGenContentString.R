@@ -37,6 +37,9 @@ getMFAToken <- function(){
 #' This is used to pass MFA device credentials along with the role tto assume in order to generate temporary credentials.
 #' If a RoleSessionName is not specified, a session uuid is generated.
 #'
+#'@family credential management functions
+#'@family service wrappers
+#'
 stsGenContentString <- function(roleArn, RoleSessionName, MFADeviceSerialNumber, Duration) {
     
     if (is.null(roleArn))

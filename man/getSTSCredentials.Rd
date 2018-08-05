@@ -19,9 +19,11 @@ Other credential management functions: \code{\link{AWSRootCredentials}},
   \code{\link{genCredentialFilePath}},
   \code{\link{getCredentials}}, \code{\link{getProfiles}},
   \code{\link{parseCredentialFile}},
+  \code{\link{stsGenContentString}},
   \code{\link{tempCredentialHandler}}
 
-Other service wrappers: \code{\link{awsRestRequest}}
+Other service wrappers: \code{\link{awsRestRequest}},
+  \code{\link{stsGenContentString}}
 }
 \concept{credential management functions}
 \concept{service wrappers}

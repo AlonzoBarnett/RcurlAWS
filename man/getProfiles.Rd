@@ -42,6 +42,7 @@ Other credential management functions: \code{\link{AWSRootCredentials}},
   \code{\link{getCredentials}},
   \code{\link{getSTSCredentials}},
   \code{\link{parseCredentialFile}},
+  \code{\link{stsGenContentString}},
   \code{\link{tempCredentialHandler}}
 }
 \concept{credential management functions}
