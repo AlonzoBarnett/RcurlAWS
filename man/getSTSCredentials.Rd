@@ -15,6 +15,7 @@ http://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
 \seealso{
 Other credential management functions: \code{\link{AWSRootCredentials}},
   \code{\link{AWSTemporaryCredentials}},
+  \code{\link{RcurlAWS}},
   \code{\link{credsFromInstanceMetadata}},
   \code{\link{genCredentialFilePath}},
   \code{\link{getCredentials}}, \code{\link{getProfiles}},
@@ -22,7 +23,8 @@ Other credential management functions: \code{\link{AWSRootCredentials}},
   \code{\link{stsGenContentString}},
   \code{\link{tempCredentialHandler}}
 
-Other service wrappers: \code{\link{awsRestRequest}},
+Other service wrappers: \code{\link{RcurlAWS}},
+  \code{\link{awsRestRequest}},
   \code{\link{stsGenContentString}}
 }
 \concept{credential management functions}

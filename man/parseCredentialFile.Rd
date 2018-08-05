@@ -14,6 +14,7 @@ read lines of the credential or config file then iterate over forming a list of 
 \seealso{
 Other credential management functions: \code{\link{AWSRootCredentials}},
   \code{\link{AWSTemporaryCredentials}},
+  \code{\link{RcurlAWS}},
   \code{\link{credsFromInstanceMetadata}},
   \code{\link{genCredentialFilePath}},
   \code{\link{getCredentials}}, \code{\link{getProfiles}},

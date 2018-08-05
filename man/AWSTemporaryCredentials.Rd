@@ -52,6 +52,7 @@ Initializes a call to STS or pulls instance meta data. Exactly which depends on 
 }
 \seealso{
 Other credential management functions: \code{\link{AWSRootCredentials}},
+  \code{\link{RcurlAWS}},
   \code{\link{credsFromInstanceMetadata}},
   \code{\link{genCredentialFilePath}},
   \code{\link{getCredentials}}, \code{\link{getProfiles}},

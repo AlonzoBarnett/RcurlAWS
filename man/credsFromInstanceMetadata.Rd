@@ -12,6 +12,7 @@ Uses curl to pull EC2 instance metadata which contains access, secret, and token
 \seealso{
 Other credential management functions: \code{\link{AWSRootCredentials}},
   \code{\link{AWSTemporaryCredentials}},
+  \code{\link{RcurlAWS}},
   \code{\link{genCredentialFilePath}},
   \code{\link{getCredentials}}, \code{\link{getProfiles}},
   \code{\link{getSTSCredentials}},

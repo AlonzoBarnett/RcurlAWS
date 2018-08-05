@@ -13,5 +13,7 @@
 #'
 #' @docType package
 #' @name RcurlAWS
+#' @family credential management functions
+#' @family service wrappers
 #'
 NULL

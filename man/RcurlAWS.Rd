@@ -18,3 +18,20 @@ Helper functions to access AWS services via package::curl
   \item NEED TO ensuring all settings in a config file are used in service calls 
 }
 }
+\seealso{
+Other credential management functions: \code{\link{AWSRootCredentials}},
+  \code{\link{AWSTemporaryCredentials}},
+  \code{\link{credsFromInstanceMetadata}},
+  \code{\link{genCredentialFilePath}},
+  \code{\link{getCredentials}}, \code{\link{getProfiles}},
+  \code{\link{getSTSCredentials}},
+  \code{\link{parseCredentialFile}},
+  \code{\link{stsGenContentString}},
+  \code{\link{tempCredentialHandler}}
+
+Other service wrappers: \code{\link{awsRestRequest}},
+  \code{\link{getSTSCredentials}},
+  \code{\link{stsGenContentString}}
+}
+\concept{credential management functions}
+\concept{service wrappers}

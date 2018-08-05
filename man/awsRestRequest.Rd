@@ -23,7 +23,8 @@ How API query requests work:
 http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html
 }
 \seealso{
-Other service wrappers: \code{\link{getSTSCredentials}},
+Other service wrappers: \code{\link{RcurlAWS}},
+  \code{\link{getSTSCredentials}},
   \code{\link{stsGenContentString}}
 }
 \concept{service wrappers}

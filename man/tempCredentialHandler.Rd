@@ -38,6 +38,7 @@ For additional information on STS requests refer to [STS Requests](https://docs.
 \seealso{
 Other credential management functions: \code{\link{AWSRootCredentials}},
   \code{\link{AWSTemporaryCredentials}},
+  \code{\link{RcurlAWS}},
   \code{\link{credsFromInstanceMetadata}},
   \code{\link{genCredentialFilePath}},
   \code{\link{getCredentials}}, \code{\link{getProfiles}},

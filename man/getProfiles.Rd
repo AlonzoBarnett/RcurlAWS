@@ -37,6 +37,7 @@ getProfiles(configFileName = NULL)
 \seealso{
 Other credential management functions: \code{\link{AWSRootCredentials}},
   \code{\link{AWSTemporaryCredentials}},
+  \code{\link{RcurlAWS}},
   \code{\link{credsFromInstanceMetadata}},
   \code{\link{genCredentialFilePath}},
   \code{\link{getCredentials}},
