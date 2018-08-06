@@ -44,7 +44,7 @@ library(RcurlAWS)
 #Assuming you are using the default setup for config/credentials files:
 rootCreds <- AWSRootCredentials$new()
 
-rootCreds <- AWSRootCredentials$new(profileName = 'psmDataScientist')
+rootCreds <- AWSRootCredentials$new(profileName = 'myFavProfile')
 
 #Make an STS call to generate temp credentials.
 #If you store MFA/role information in your config/credential files,
