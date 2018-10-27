@@ -3,33 +3,34 @@
 getMFAToken <- function(){
     #based on:
     # https://stackoverflow.com/questions/16847621/get-data-out-of-a-tcltk-function
-
-    if (!interactive()) {
+    
+    if (!interactive() | !capabilities()[['tcltk']]) {
+       print('Input MFA Token:'); flush.console()
        return(readLines(file("stdin"), n = 1L))
+    } else {
+        mfaToken <- tcltk::tclVar("")
+        tt <- tcltk::tktoplevel()
+        tcltk::tkwm.title(tt,"Input MFA Token")
+        mfaToken.entry <- tcltk::tkentry(tt, textvariable=mfaToken)
+        
+        reset <- function() { tcltk::tclvalue(mfaToken)<-"" }
+        reset.but <- tcltk::tkbutton(tt, text="Reset", command=reset)
+        
+        submit <- function() {
+            mfaTokenRet <- as.character(tcltk::tclvalue(mfaToken))
+            e <- parent.env(environment())
+            e$mfaTokenRet <- mfaTokenRet
+            tcltk::tkdestroy(tt)
+        }
+        
+        submit.but <- tcltk::tkbutton(tt, text="submit", command=submit)
+        
+        tcltk::tkgrid(tcltk::tklabel(tt,text="MFA Token"), mfaToken.entry, pady = 10, padx =10)
+        tcltk::tkgrid(submit.but, reset.but)
+        
+        tcltk::tkwait.window(tt)
+        return(mfaTokenRet)
     }
-    
-    mfaToken <- tcltk::tclVar("")
-    tt <- tcltk::tktoplevel()
-    tcltk::tkwm.title(tt,"Input MFA Token")
-    mfaToken.entry <- tcltk::tkentry(tt, textvariable=mfaToken)
-    
-    reset <- function() { tcltk::tclvalue(mfaToken)<-"" }
-    reset.but <- tcltk::tkbutton(tt, text="Reset", command=reset)
-    
-    submit <- function() {
-        mfaTokenRet <- as.character(tcltk::tclvalue(mfaToken))
-        e <- parent.env(environment())
-        e$mfaTokenRet <- mfaTokenRet
-        tcltk::tkdestroy(tt)
-    }
-    
-    submit.but <- tcltk::tkbutton(tt, text="submit", command=submit)
-    
-    tcltk::tkgrid(tcltk::tklabel(tt,text="MFA Token"), mfaToken.entry, pady = 10, padx =10)
-    tcltk::tkgrid(submit.but, reset.but)
-    
-    tcltk::tkwait.window(tt)
-    return(mfaTokenRet)
 }
 
 
